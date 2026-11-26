@@ -1,0 +1,6 @@
+{
+  "name": "Umi Hana — Kripik Tempe & Sistem Konversi Penjualan",
+  "description": "Landing page dan sales page Kripik Tempe Umi Hana dilengkapi integrasi CRM, pelacakan analitik konversi real-time, otomasi follow-up WhatsApp, dan pembayaran terintegrasi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
