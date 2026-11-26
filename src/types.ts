@@ -41,6 +41,7 @@ export interface Testimonial {
   name: string;
   role: string;
   city: string;
+  avatar: string;
   segment: 'Keluarga' | 'Kantor & Hampers' | 'Reseller';
   packageBought: string;
   quote: string;

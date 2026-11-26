@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowUpRight, MessageSquare, PackageCheck, Store, X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { BRAND_INFO } from '../data/catalog.ts';
@@ -98,7 +99,7 @@ export function FloatingWhatsAppButton({ hidden = false }: FloatingWhatsAppButto
     };
   }, [open]);
 
-  if (hidden) return null;
+  if (hidden || typeof document === 'undefined') return null;
 
   const directChatUrl = buildWhatsAppUrl(
     'Halo Umi Hana, saya ingin bertanya atau memesan Kripik Tempe Rasa Original (60 g).'
@@ -117,10 +118,10 @@ export function FloatingWhatsAppButton({ hidden = false }: FloatingWhatsAppButto
     setOpen(false);
   };
 
-  return (
+  const content = (
     <div
       ref={containerRef}
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end"
+      className="fixed bottom-[max(1rem,calc(env(safe-area-inset-bottom)+0.75rem))] right-4 sm:bottom-6 sm:right-6 z-[60] flex flex-col items-end"
     >
       <AnimatePresence>
         {open && (
@@ -213,7 +214,7 @@ export function FloatingWhatsAppButton({ hidden = false }: FloatingWhatsAppButto
         aria-expanded={open}
         aria-controls="umi-floating-wa-panel"
         aria-label={open ? 'Tutup menu WhatsApp Umi Hana' : 'Chat atau pesan via WhatsApp Umi Hana'}
-        className="group inline-flex items-center justify-center gap-2.5 h-14 w-14 sm:w-auto sm:px-5 rounded-full bg-[#1D8F44] hover:bg-[#167336] active:scale-[0.98] text-white shadow-[0_12px_28px_rgba(22,115,54,0.34)] border border-white/25 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B6B3A] focus-visible:ring-offset-2"
+        className="group inline-flex items-center justify-center gap-2.5 h-13 w-13 sm:h-14 sm:w-auto sm:px-5 rounded-full bg-[#1D8F44] hover:bg-[#167336] active:scale-[0.98] text-white shadow-[0_12px_28px_rgba(22,115,54,0.38)] border-2 border-white/80 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B6B3A] focus-visible:ring-offset-2"
       >
         {open ? (
           <X className="w-6 h-6 shrink-0" />
@@ -226,4 +227,6 @@ export function FloatingWhatsAppButton({ hidden = false }: FloatingWhatsAppButto
       </button>
     </div>
   );
+
+  return createPortal(content, document.body);
 }

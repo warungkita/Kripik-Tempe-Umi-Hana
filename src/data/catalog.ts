@@ -1,4 +1,8 @@
 import type { PaymentMethodId, ProductPackage, Testimonial } from '../types.ts';
+import ratnaAvatar from '../assets/images/customer_ratna_wijaya_1795661767003.jpg';
+import hendroAvatar from '../assets/images/customer_hendro_santoso_1795661766299.jpg';
+import nadiaAvatar from '../assets/images/customer_nadia_kusuma_1795661767827.jpg';
+import bambangAvatar from '../assets/images/customer_bambang_prasetyo_1795661768759.jpg';
 
 export const BRAND_INFO = {
   name: 'Umi Hana',
@@ -141,6 +145,7 @@ export const VERIFIED_TESTIMONIALS: Testimonial[] = [
     name: 'Ratna Wijaya',
     role: 'Ibu Rumah Tangga & Pengajar',
     city: 'Bandung',
+    avatar: ratnaAvatar,
     segment: 'Keluarga',
     packageBought: 'Paket Stok Rumah (6 Bungkus)',
     quote:
@@ -153,6 +158,7 @@ export const VERIFIED_TESTIMONIALS: Testimonial[] = [
     name: 'Hendro Santoso',
     role: 'General Affairs Lead, PT Sinar Logistik',
     city: 'Jakarta Selatan',
+    avatar: hendroAvatar,
     segment: 'Kantor & Hampers',
     packageBought: 'Paket Kantor & Reseller (15 Bungkus)',
     quote:
@@ -165,6 +171,7 @@ export const VERIFIED_TESTIMONIALS: Testimonial[] = [
     name: 'Nadia Kusuma',
     role: 'Pemilik Kedai Kopi Ruang Teduh',
     city: 'Yogyakarta',
+    avatar: nadiaAvatar,
     segment: 'Reseller',
     packageBought: 'Paket Kantor & Reseller (15 Bungkus)',
     quote:
@@ -177,6 +184,7 @@ export const VERIFIED_TESTIMONIALS: Testimonial[] = [
     name: 'Bambang Prasetyo',
     role: 'Karyawan Swasta',
     city: 'Surabaya',
+    avatar: bambangAvatar,
     segment: 'Keluarga',
     packageBought: 'Paket Stok Rumah (6 Bungkus)',
     quote:

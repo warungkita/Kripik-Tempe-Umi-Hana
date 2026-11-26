@@ -24,7 +24,7 @@ export function Navbar({ activeView, onSwitchView, onQuickOrder }: NavbarProps) 
 
   return (
     <header className="sticky top-0 z-40 bg-[#FFFDF5]/95 backdrop-blur-md border-b border-[#EAE2C6]">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-14 md:h-16 flex items-center justify-between gap-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-14 lg:h-16 flex items-center justify-between gap-4 lg:gap-8">
         {/* Zone 1: Single clean brand wordmark with botanical leaf mark */}
         <button
           type="button"
@@ -40,7 +40,7 @@ export function Navbar({ activeView, onSwitchView, onQuickOrder }: NavbarProps) 
         </button>
 
         {/* Zone 2: 5 concise single-line text links */}
-        <nav aria-label="Navigasi Utama" className="hidden md:flex items-center gap-7 text-sm font-semibold text-[#3C4B38]">
+        <nav aria-label="Navigasi Utama" className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold text-[#3C4B38]">
           <button
             type="button"
             onClick={() => handleAnchor('keunggulan')}
@@ -111,7 +111,7 @@ export function Navbar({ activeView, onSwitchView, onQuickOrder }: NavbarProps) 
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
             aria-expanded={mobileOpen}
-            className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#EAE2C6] bg-white text-[#1C2A1A] hover:bg-[#F7F3E3] transition-colors cursor-pointer"
+            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#EAE2C6] bg-white text-[#1C2A1A] hover:bg-[#F7F3E3] transition-colors cursor-pointer"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -123,9 +123,9 @@ export function Navbar({ activeView, onSwitchView, onQuickOrder }: NavbarProps) 
           <div
             aria-hidden="true"
             onClick={() => setMobileOpen(false)}
-            className="md:hidden fixed inset-x-0 top-14 bottom-0 z-40 bg-[#141A15]/30 backdrop-blur-[1px]"
+            className="lg:hidden fixed inset-x-0 top-14 bottom-0 z-40 bg-[#141A15]/30 backdrop-blur-[1px]"
           />
-          <div className="md:hidden absolute left-0 right-0 top-full z-50 border-t border-b border-[#EAE2C6] bg-[#FFFDF5] shadow-[0_18px_36px_rgba(20,26,21,0.16)] px-4 py-4 space-y-1">
+          <div className="lg:hidden absolute left-0 right-0 top-full z-50 border-t border-b border-[#EAE2C6] bg-[#FFFDF5] shadow-[0_18px_36px_rgba(20,26,21,0.16)] px-4 py-4 space-y-1">
             <button
               type="button"
               onClick={() => handleAnchor('keunggulan')}

@@ -7,6 +7,12 @@
 }
 
 @layer base {
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
   html {
     font-family: var(--font-sans);
     color: #1C2A1A;

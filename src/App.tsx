@@ -5,6 +5,7 @@ import { LandingSalesPage } from './components/LandingSalesPage.tsx';
 import { MerchantDashboard } from './components/MerchantDashboard.tsx';
 import { Navbar } from './components/Navbar.tsx';
 import { OrderTrackingPage } from './components/OrderTrackingPage.tsx';
+import { ScrollToTopRocket } from './components/ScrollToTopRocket.tsx';
 import { fetchPublicSummary, trackAnalyticsEvent } from './lib/api.ts';
 import type { OrderRecord, PackageId } from './types.ts';
 
@@ -145,6 +146,8 @@ export default function App() {
         onTrackOrder={handleOpenTracking}
         onNotify={showToast}
       />
+
+      <ScrollToTopRocket hidden={checkoutOpen} />
 
       <FloatingWhatsAppButton hidden={!showFloatingWa} />
 

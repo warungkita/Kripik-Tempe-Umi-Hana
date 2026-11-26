@@ -12,7 +12,6 @@ import {
   Package,
   ShieldCheck,
   ShoppingCart,
-  Star,
   ThumbsUp,
   Truck,
 } from 'lucide-react';
@@ -25,8 +24,10 @@ import {
   formatRupiah,
 } from '../data/catalog.ts';
 import { submitLead, trackAnalyticsEvent } from '../lib/api.ts';
-import type { PackageId, Testimonial } from '../types.ts';
+import type { PackageId } from '../types.ts';
+import { AnimatedCounter } from './AnimatedCounter.tsx';
 import { OrderTrackerSection } from './OrderTrackerSection.tsx';
+import { TestimonialSlider } from './TestimonialSlider.tsx';
 import { TrustBadgesStrip } from './TrustBadgesStrip.tsx';
 
 interface LandingSalesPageProps {
@@ -103,7 +104,6 @@ export function LandingSalesPage({
   onNotify,
 }: LandingSalesPageProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [segmentFilter, setSegmentFilter] = useState<'Semua' | Testimonial['segment']>('Semua');
   const [packagingImgFailed, setPackagingImgFailed] = useState(false);
   const [bowlImgFailed, setBowlImgFailed] = useState(false);
   const [familyImgFailed, setFamilyImgFailed] = useState(false);
@@ -121,11 +121,6 @@ export function LandingSalesPage({
     name: string;
     waLink: string | null;
   } | null>(null);
-
-  const filteredTestimonials =
-    segmentFilter === 'Semua'
-      ? VERIFIED_TESTIMONIALS
-      : VERIFIED_TESTIMONIALS.filter((t) => t.segment === segmentFilter);
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -470,17 +465,19 @@ export function LandingSalesPage({
 
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="bg-white border border-[#EAE0C1] rounded-xl p-3.5">
-                <div className="font-mono-tabular text-lg font-extrabold text-[#157A28]">
-                  {packsDelivered.toLocaleString('id-ID')}+
-                </div>
-                <div className="text-[11px] font-medium text-[#525C53] mt-0.5">Kemasan Terkirim</div>
-              </div>
-              <div className="bg-white border border-[#EAE0C1] rounded-xl p-3.5">
-                <div className="font-mono-tabular text-lg font-extrabold text-[#B45309]">
-                  4,9 / 5,0
+                <div className="font-mono-tabular text-lg sm:text-xl font-extrabold text-[#157A28]">
+                  <AnimatedCounter value={packsDelivered} durationMs={1500} suffix="+" />
                 </div>
                 <div className="text-[11px] font-medium text-[#525C53] mt-0.5">
-                  {activeCustomers.toLocaleString('id-ID')}+ Pembeli
+                  Kemasan Terkirim
+                </div>
+              </div>
+              <div className="bg-white border border-[#EAE0C1] rounded-xl p-3.5">
+                <div className="font-mono-tabular text-lg sm:text-xl font-extrabold text-[#B45309]">
+                  <AnimatedCounter value={activeCustomers} durationMs={1400} suffix="+" />
+                </div>
+                <div className="text-[11px] font-medium text-[#525C53] mt-0.5">
+                  Pelanggan Aktif · Rating 4,9/5,0
                 </div>
               </div>
             </div>
@@ -775,90 +772,8 @@ export function LandingSalesPage({
         </div>
       </section>
 
-      {/* SECTION 5: TESTIMONI PELANGGAN */}
-      <section id="testimoni" className="bg-[#FAF5E4]/80 border-y border-[#ECE2C3] py-16 lg:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-8 space-y-4">
-            <div className="flex items-center justify-center gap-3">
-              <span className="w-12 h-1.5 rounded-full bg-[#229834]" aria-hidden="true" />
-              <h2 className="font-display italic font-extrabold text-3xl sm:text-4xl text-[#135E20] tracking-tight">
-                Testimoni Pelanggan
-              </h2>
-              <span className="w-12 h-1.5 rounded-full bg-[#FACC15]" aria-hidden="true" />
-            </div>
-
-            {/* Interactive Segmented Filter Control */}
-            <div
-              role="tablist"
-              aria-label="Filter kategori testimoni"
-              className="inline-flex flex-wrap items-center justify-center gap-1 p-1 bg-white border border-[#EAE0C1] rounded-full shadow-xs"
-            >
-              {(['Semua', 'Keluarga', 'Kantor & Hampers', 'Reseller'] as const).map((seg) => (
-                <button
-                  key={seg}
-                  type="button"
-                  role="tab"
-                  aria-selected={segmentFilter === seg}
-                  onClick={() => setSegmentFilter(seg)}
-                  className={`px-4 py-1.5 text-xs font-bold rounded-full transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                    segmentFilter === seg
-                      ? 'bg-[#177A28] text-white'
-                      : 'text-[#4B5847] hover:text-[#135E20]'
-                  }`}
-                >
-                  {seg}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredTestimonials.map((item) => {
-              const initials = item.name
-                .split(' ')
-                .slice(0, 2)
-                .map((p) => p[0])
-                .join('');
-              return (
-                <article
-                  key={item.id}
-                  className="bg-[#FFFDF5] border border-[#EAE0C1] rounded-2xl p-6 shadow-[0_8px_24px_rgba(74,37,17,0.06)] flex flex-col justify-between space-y-4"
-                >
-                  <div className="flex items-start gap-4">
-                    <div
-                      aria-hidden="true"
-                      className="w-12 h-12 rounded-full bg-gradient-to-br from-[#229834] to-[#135E20] text-[#FDE047] font-display font-bold text-base flex items-center justify-center shrink-0 shadow-xs"
-                    >
-                      {initials}
-                    </div>
-                    <div className="space-y-2 flex-1">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <div className="flex items-center gap-0.5 text-[#F59E0B]" aria-label="Rating 5 dari 5">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-current" />
-                          ))}
-                        </div>
-                        <span className="text-xs text-[#6B7466]">{item.verifiedDate}</span>
-                      </div>
-                      <p className="text-sm sm:text-[15px] text-[#1C2A1A] leading-relaxed font-medium">
-                        &ldquo;{item.quote}&rdquo;
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="pt-3 border-t border-[#EFE7CE] flex flex-wrap items-center justify-between gap-2 text-xs">
-                    <div>
-                      <span className="font-bold text-[#1C2A1A]">— {item.name}</span>
-                      <span className="text-[#525C53]"> · {item.role}, {item.city}</span>
-                    </div>
-                    <span className="font-bold text-[#157A28]">{item.outcome}</span>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* SECTION 5: SLIDER TESTIMONI PELANGGAN */}
+      <TestimonialSlider testimonials={VERIFIED_TESTIMONIALS} />
 
       {/* SECTION 6: PELACAKAN PESANAN (SYNCED WITH CRM) */}
       <OrderTrackerSection

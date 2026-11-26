@@ -242,7 +242,7 @@ export function CheckoutModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#141A15]/55 backdrop-blur-[2px] p-3 sm:p-6 overflow-y-auto"
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-[#141A15]/55 backdrop-blur-[2px] p-3 sm:p-6 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="checkout-modal-title"
